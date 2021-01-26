@@ -79,7 +79,7 @@ Sometimes a client may wish to start at a specific offset, of process only a lim
 client.lists({ page: 1, max_pages: 1})
 ```
 
-The above example would start on page 1 (the default is page 0), and return only 1 page of results.
+The above example would start on page 1 (the default is page 0), and return only 1 page of results (by default it will return all pages).
 
 ## Development
 
