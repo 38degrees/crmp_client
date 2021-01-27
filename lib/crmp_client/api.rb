@@ -70,14 +70,21 @@ module CrmpClient
     # Helper method to make a raw API call. Returns the response body, parsed from JSON into a Ruby hash. If the
     # response status is not 200 (OK) it will raise an error.
     def raw_api_call(path, params)
-      res = @httpclient.post(path, params.to_json)
-      if res.status == 200
-        JSON.parse(res.body)
+      response = @httpclient.post(path, params.to_json)
+      if response.status == 200
+        parse_response(response)
       else
-        # TODO: logging
-        Rails.logger.error { "CRMP API Call to #{path} with #{params} failed with status #{res.status}" }
-        raise "CRMP API Call failed with status code #{res.status}"
+        CrmpClient.configuration.logger.error do
+          "CRMP API Call to #{path} with #{params} failed with status #{response.status}"
+        end
+        raise CrmpClient::HttpError.new(response.status, response.body)
       end
+    end
+
+    def parse_response(response)
+      JSON.parse(response.body)
+    rescue JSON::ParserError => e
+      raise(CrmpClient::InvalidResponseBodyError, e.message)
     end
   end
 end

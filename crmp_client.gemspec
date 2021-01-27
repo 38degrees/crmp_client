@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'codecov', '>= 0.4'
+  spec.add_development_dependency 'faker', '~> 2.15'
   spec.add_development_dependency 'pry', '>= 0.13'
   spec.add_development_dependency 'rake', '>= 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'

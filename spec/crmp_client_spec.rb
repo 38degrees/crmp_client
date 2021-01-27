@@ -5,6 +5,10 @@ RSpec.describe CrmpClient do
     expect(CrmpClient::VERSION).not_to be nil
   end
 
+  # These tests simply check that CrmpClient.new creates an appropriate CrmpClient::Client instance based on the
+  # given arguments and any configured defaults.
+  #
+  # Tests for the behaviour of CrmpClient::Client are in the client_spec.rb file.
   describe '.new' do
     let(:default_base_uri) { 'https://crmp.default.org' }
     let(:default_api_token) { 'strong_token' }

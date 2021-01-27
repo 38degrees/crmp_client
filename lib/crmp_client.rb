@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'crmp_client/version'
+require_relative 'crmp_client/api'
+require_relative 'crmp_client/errors'
 require_relative 'crmp_client/client'
 require_relative 'crmp_client/configuration'
-require_relative 'crmp_client/api'
+require_relative 'crmp_client/version'
 
 # The main namespace for CrmpClient.
 #
