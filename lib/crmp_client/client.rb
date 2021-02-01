@@ -42,6 +42,20 @@ module CrmpClient
     # - `crmp_client.lists.each { |list| puts "#{list.name}" }`
     # - `crmp_client.each_list { |list| puts "#{list.name}" }`
 
+    # Get all memberships whose Organisation matches the given `organization_name`, and whose Role matches the given
+    # `role_name`. Both `organization_name` & `role_name` are optional, eg. if `role_name` is omitted then only
+    # `organization_name` is used to search for memberships.
+    def memberships(organization_name, role_name, options = {})
+      @api.collect_api_call('memberships.json', { organization: organization_name, role: role_name }, options)
+    end
+
+    # Iterate over all memberships whose Organisation matches the given `organization_name`, and whose Role matches the
+    # given `role_name`. Both `organization_name` & `role_name` are optional, eg. if `role_name` is omitted then only
+    # `organization_name` is used to search for memberships.
+    def each_membership(organization_name, role_name, options = {}, &block)
+      @api.each_api_call('memberships.json', { organization: organization_name, role: role_name }, options, block)
+    end
+
     # Get all all lists
     def lists(options = {})
       @api.collect_api_call('lists.json', {}, options).sort_by { |list| list['created_at'] }

@@ -278,6 +278,26 @@ RSpec.describe CrmpClient::Client do
   end
 
   # Paged APIs
+  describe '#memberships' do
+    it_behaves_like 'a paged collection API' do
+      let(:method) { :memberships }
+      let(:method_params) { ['House of Commons', 'MP'] }
+
+      let(:request_path) { 'memberships.json' }
+      let(:request_params) { { organization: 'House of Commons', role: 'MP' } }
+    end
+  end
+
+  describe '#each_membership' do
+    it_behaves_like 'a paged iterating API' do
+      let(:method) { :each_membership }
+      let(:method_params) { ['House of Commons', 'MP'] }
+
+      let(:request_path) { 'memberships.json' }
+      let(:request_params) { { organization: 'House of Commons', role: 'MP' } }
+    end
+  end
+
   describe '#lists' do
     it_behaves_like 'a paged collection API' do
       let(:method) { :lists }
